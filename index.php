@@ -2,7 +2,7 @@
 session_start();
 require_once 'connect.php';
 
-// Get featured article
+
 $featuredStmt = $pdo->prepare("
     SELECT a.*, c.name as category_name, c.slug as category_slug 
     FROM articles a 
@@ -14,7 +14,7 @@ $featuredStmt = $pdo->prepare("
 $featuredStmt->execute();
 $featuredArticle = $featuredStmt->fetch();
 
-// Get latest articles
+
 $articlesStmt = $pdo->prepare("
     SELECT a.*, c.name as category_name, c.slug as category_slug 
     FROM articles a 
@@ -26,11 +26,11 @@ $articlesStmt = $pdo->prepare("
 $articlesStmt->execute();
 $articles = $articlesStmt->fetchAll();
 
-// Get categories
+
 $categoriesStmt = $pdo->query("SELECT * FROM categories ORDER BY name");
 $categories = $categoriesStmt->fetchAll();
 
-// Group articles by category
+
 $articlesByCategory = [];
 foreach ($articles as $article) {
     if ($article['category_slug']) {

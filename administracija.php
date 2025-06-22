@@ -10,7 +10,6 @@ require_once 'connect.php';
 $message = '';
 $error = '';
 
-// Handle actions
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
     $id = (int)($_GET['id'] ?? 0);
@@ -46,7 +45,6 @@ if (isset($_GET['action'])) {
     }
 }
 
-// Handle editing
 if (isset($_POST['edit_article'])) {
     $id = (int)$_POST['id'];
     $title = trim($_POST['title'] ?? '');
@@ -76,7 +74,6 @@ if (isset($_POST['edit_article'])) {
     }
 }
 
-// Get editing article
 $editingArticle = null;
 if (isset($_GET['edit'])) {
     $editId = (int)$_GET['edit'];
@@ -85,7 +82,6 @@ if (isset($_GET['edit'])) {
     $editingArticle = $editStmt->fetch(PDO::FETCH_ASSOC);
 }
 
-// Get all articles
 $stmt = $pdo->query("
     SELECT a.*, c.name as category_name 
     FROM articles a 
@@ -94,7 +90,6 @@ $stmt = $pdo->query("
 ");
 $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Get categories for the form
 $categoryStmt = $pdo->query("SELECT * FROM categories ORDER BY name");
 $categories = $categoryStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>

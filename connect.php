@@ -1,7 +1,4 @@
 <?php
-// Database configuration
-// Use environment variables with sensible defaults
-
 define('DB_HOST', getenv('DB_HOST'));
 define('DB_USER', getenv('DB_USER'));
 define('DB_PASS', getenv('DB_PASS'));
@@ -22,7 +19,6 @@ try {
     die("Connection failed: " . $e->getMessage());
 }
 
-// Helper functions
 function generateSlug($text) {
     $text = strtolower($text);
     $text = preg_replace('/[^a-z0-9\s-]/', '', $text);

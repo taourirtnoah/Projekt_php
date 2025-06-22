@@ -8,7 +8,7 @@ if (!$articleId) {
     exit;
 }
 
-// Get article
+
 $stmt = $pdo->prepare("
     SELECT a.*, c.name as category_name, c.slug as category_slug 
     FROM articles a 
@@ -23,11 +23,11 @@ if (!$article) {
     exit;
 }
 
-// Update view count
+
 $updateViews = $pdo->prepare("UPDATE articles SET views = views + 1 WHERE id = ?");
 $updateViews->execute([$articleId]);
 
-// Get related articles
+
 $relatedStmt = $pdo->prepare("
     SELECT a.*, c.name as category_name 
     FROM articles a 
@@ -38,7 +38,7 @@ $relatedStmt = $pdo->prepare("
 $relatedStmt->execute([$article['category_id'], $articleId]);
 $relatedArticles = $relatedStmt->fetchAll();
 
-// Get categories for navigation
+
 $categoriesStmt = $pdo->query("SELECT * FROM categories ORDER BY name");
 $categories = $categoriesStmt->fetchAll();
 ?>

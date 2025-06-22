@@ -8,7 +8,6 @@ if (!$categorySlug) {
     exit;
 }
 
-// Get category
 $categoryStmt = $pdo->prepare("SELECT * FROM categories WHERE slug = ?");
 $categoryStmt->execute([$categorySlug]);
 $category = $categoryStmt->fetch();
@@ -18,7 +17,6 @@ if (!$category) {
     exit;
 }
 
-// Get articles for this category
 $articlesStmt = $pdo->prepare("
     SELECT a.*, c.name as category_name, c.slug as category_slug 
     FROM articles a 
@@ -29,7 +27,6 @@ $articlesStmt = $pdo->prepare("
 $articlesStmt->execute([$categorySlug]);
 $articles = $articlesStmt->fetchAll();
 
-// Get all categories for navigation
 $categoriesStmt = $pdo->query("SELECT * FROM categories ORDER BY name");
 $categories = $categoriesStmt->fetchAll();
 ?>

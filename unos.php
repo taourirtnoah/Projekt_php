@@ -10,7 +10,7 @@ require_once 'connect.php';
 $message = '';
 $error = '';
 
-// Get categories
+
 $categoriesStmt = $pdo->query("SELECT * FROM categories ORDER BY name");
 $categories = $categoriesStmt->fetchAll();
 
@@ -29,7 +29,6 @@ if ($_POST) {
     } else {
         $slug = generateSlug($title);
         
-        // Check if slug exists
         $slugCheck = $pdo->prepare("SELECT id FROM articles WHERE slug = ?");
         $slugCheck->execute([$slug]);
         if ($slugCheck->fetch()) {
@@ -45,7 +44,6 @@ if ($_POST) {
             
             $message = 'Članak je uspješno dodan!';
             
-            // Clear form
             $_POST = [];
         } catch (PDOException $e) {
             $error = 'Greška pri dodavanju članka: ' . $e->getMessage();
